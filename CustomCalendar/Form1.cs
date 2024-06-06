@@ -112,6 +112,7 @@ namespace CustomCalendar
             Button removeMonthButton = new Button();
             removeMonthButton.Text = "Remove";
             removeMonthButton.Location = new System.Drawing.Point(0, numberOfDaysTextBox.Bottom);
+            removeMonthButton.Click += new EventHandler(removeMonthButton_Clicked);
             newPanel.Controls.Add(removeMonthButton);
 
 
@@ -145,6 +146,22 @@ namespace CustomCalendar
             }
         }
 
+        private void removeMonthButton_Clicked(object? sender, EventArgs e)
+        {
+            Button? removeMonthButton = sender as Button;
+            if (removeMonthButton == null)
+            {
+                return;
+            }
+
+            int panelIndex = allMonthsFlowPanel.Controls.IndexOf(removeMonthButton.Parent);
+            if (panelIndex != -1)
+            {
+                m_calendarData.GetMonthsData().RemoveAt(panelIndex);
+                allMonthsFlowPanel.Controls.RemoveAt(panelIndex);
+            }
+        }
+
         private void generatePDFButton_Click(object sender, EventArgs e)
         {
             Stream myStream;
@@ -164,17 +181,15 @@ namespace CustomCalendar
                     Document document = new Document(pdfDocument, getPageSize());
                     document.SetMargins(20, 20, 20, 20);
 
-                    if (exportFormatComboBox.SelectedIndex == 0)
-                    {
-                        createWeeklyPDFTable(document);
-                    }
-                    else
-                    {
-                        int monthDayStartingIndex = startingDayComboBox.SelectedIndex >= 0 ? startingDayComboBox.SelectedIndex : 0;
+                    int monthDayStartingIndex = m_calendarData.GetStartingDayComboIndex();
+                    int weekNumber = 0;
 
-                        for (int i = 0; i < m_calendarData.GetMonthsData().Count; ++i)
+                    for (int i = 0; i < m_calendarData.GetMonthsData().Count; ++i)
+                    {
+                        MonthData monthData = m_calendarData.GetMonthsData()[i];
+
+                        if (m_calendarData.GetExportFormatType() == ExportFormatType.Monthly)
                         {
-                            MonthData monthData = m_calendarData.GetMonthsData()[i];
                             createMonthPDFTable(document, monthData, monthDayStartingIndex);
 
                             monthDayStartingIndex = (monthDayStartingIndex + monthData.GetNumberOfDays()) % m_calendarData.GetDaysData().Count;
@@ -184,6 +199,30 @@ namespace CustomCalendar
                                 document.Add(new AreaBreak());
                             }
                         }
+                        else
+                        {
+                            int numberOfWeeksInMonth = (int)Math.Ceiling((float)monthData.GetNumberOfDays() / (float)m_calendarData.GetDaysData().Count);
+                            int dayNumber = -monthDayStartingIndex;
+                            int startingDayInMonth = monthDayStartingIndex;
+                            while (dayNumber < monthData.GetNumberOfDays())
+                            {
+                                if (weekNumber > 0)
+                                {
+                                    document.Add(new AreaBreak());
+                                }
+
+                                createWeeklyPDFTable(document, monthData, weekNumber++, dayNumber, startingDayInMonth);
+
+                                dayNumber += m_calendarData.GetDaysData().Count;
+
+                            }
+                            for (int j = 0; j < numberOfWeeksInMonth; ++j)
+                            {
+
+                            }
+
+                            monthDayStartingIndex = (monthDayStartingIndex + monthData.GetNumberOfDays()) % m_calendarData.GetDaysData().Count;
+                        }
                     }
 
                     pdfDocument.Close();
@@ -192,14 +231,12 @@ namespace CustomCalendar
             }
         }
 
-        private void createWeeklyPDFTable(Document document)
+        private void createWeeklyPDFTable(Document document, MonthData monthData, int weekNumber, int dayNumber, int startingDayInMonth)
         {
-            int weekNumber = 0;
-
             Table header = new Table(3);
             header.SetWidth(UnitValue.CreatePercentValue(100));
             header.AddCell(new Cell().Add(new Paragraph("Week: " + (weekNumber + 1))));
-            header.AddCell(new Cell().Add(new Paragraph("Month: ")));
+            header.AddCell(new Cell().Add(new Paragraph("Month: " + monthData.GetMonthName())));
             header.AddCell(new Cell().Add(new Paragraph("Year: ")));
             header.SetPaddingBottom(10);
             header.SetHeight(UnitValue.CreatePointValue(30));
@@ -216,13 +253,32 @@ namespace CustomCalendar
             {
                 table.AddHeaderCell(day.GetDayName());
             }
-            foreach (DayData day in m_calendarData.GetDaysData())
+
+            for (int i = 0; i < m_calendarData.GetDaysData().Count; ++i)
             {
                 Cell cell = new Cell();
-                cell.Add(new Paragraph("" + 0));
+                if (dayNumber + i < 0 || dayNumber + i >= monthData.GetNumberOfDays())
+                {
+                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
+                }
+                else
+                {
+                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.WHITE);
+                    cell.Add(new Paragraph("" + (dayNumber + i + 1)));
+                }
 
                 table.AddCell(cell);
             }
+
+
+
+            //foreach (DayData day in m_calendarData.GetDaysData())
+            //{
+            //    Cell cell = new Cell();
+            //    cell.Add(new Paragraph("" + 0));
+
+            //    table.AddCell(cell);
+            //}
 
             //foreach (DayData day in m_daysData)
             //{

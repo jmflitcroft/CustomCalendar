@@ -80,3 +80,4 @@ D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\refint\Cus
 D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.pdb
 D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.genruntimeconfig.cache
 D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\ref\CustomCalendar.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.sourcelink.json

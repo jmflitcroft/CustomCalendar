@@ -34,7 +34,7 @@ namespace CustomCalendar
         private List<MonthData> m_monthsData = new List<MonthData>();
 
         [DataMember]
-        private int m_startingDayComboIndex = -1;
+        private int m_startingDayComboIndex = 0;
         [DataMember]
         private PageLayoutType m_pageLayoutType = PageLayoutType.Portrait;
         [DataMember]
