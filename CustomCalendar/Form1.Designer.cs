@@ -55,10 +55,15 @@ namespace CustomCalendar
             button1 = new Button();
             eventsTabPage = new TabPage();
             finalizeTabPage = new TabPage();
+            splitContainer3 = new SplitContainer();
+            exportFormatComboBox = new ComboBox();
+            label3 = new Label();
+            pageLayoutComboBox = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             startingDayComboBox = new ComboBox();
-            pageLayoutComboBox = new ComboBox();
+            loadDataButton = new Button();
+            saveDataButton = new Button();
             button2 = new Button();
             mainTabsControl.SuspendLayout();
             daysTabPage.SuspendLayout();
@@ -74,6 +79,10 @@ namespace CustomCalendar
             splitContainer2.SuspendLayout();
             panel2.SuspendLayout();
             finalizeTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
+            splitContainer3.Panel1.SuspendLayout();
+            splitContainer3.Panel2.SuspendLayout();
+            splitContainer3.SuspendLayout();
             SuspendLayout();
             // 
             // mainTabsControl
@@ -217,11 +226,7 @@ namespace CustomCalendar
             // 
             // finalizeTabPage
             // 
-            finalizeTabPage.Controls.Add(label2);
-            finalizeTabPage.Controls.Add(label1);
-            finalizeTabPage.Controls.Add(startingDayComboBox);
-            finalizeTabPage.Controls.Add(pageLayoutComboBox);
-            finalizeTabPage.Controls.Add(button2);
+            finalizeTabPage.Controls.Add(splitContainer3);
             finalizeTabPage.Location = new System.Drawing.Point(4, 24);
             finalizeTabPage.Name = "finalizeTabPage";
             finalizeTabPage.Padding = new Padding(3);
@@ -230,10 +235,61 @@ namespace CustomCalendar
             finalizeTabPage.Text = "Finalize";
             finalizeTabPage.UseVisualStyleBackColor = true;
             // 
+            // splitContainer3
+            // 
+            splitContainer3.Dock = DockStyle.Fill;
+            splitContainer3.Location = new System.Drawing.Point(3, 3);
+            splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            splitContainer3.Panel1.Controls.Add(exportFormatComboBox);
+            splitContainer3.Panel1.Controls.Add(label3);
+            splitContainer3.Panel1.Controls.Add(pageLayoutComboBox);
+            splitContainer3.Panel1.Controls.Add(label2);
+            splitContainer3.Panel1.Controls.Add(label1);
+            splitContainer3.Panel1.Controls.Add(startingDayComboBox);
+            // 
+            // splitContainer3.Panel2
+            // 
+            splitContainer3.Panel2.Controls.Add(loadDataButton);
+            splitContainer3.Panel2.Controls.Add(saveDataButton);
+            splitContainer3.Panel2.Controls.Add(button2);
+            splitContainer3.Size = new Size(786, 416);
+            splitContainer3.SplitterDistance = 525;
+            splitContainer3.TabIndex = 7;
+            // 
+            // exportFormatComboBox
+            // 
+            exportFormatComboBox.FormattingEnabled = true;
+            exportFormatComboBox.Location = new System.Drawing.Point(139, 100);
+            exportFormatComboBox.Name = "exportFormatComboBox";
+            exportFormatComboBox.Size = new Size(121, 23);
+            exportFormatComboBox.TabIndex = 8;
+            exportFormatComboBox.SelectedIndexChanged += exportFormatComboBox_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(40, 100);
+            label3.Name = "label3";
+            label3.Size = new Size(85, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Export Format:";
+            // 
+            // pageLayoutComboBox
+            // 
+            pageLayoutComboBox.FormattingEnabled = true;
+            pageLayoutComboBox.Location = new System.Drawing.Point(139, 63);
+            pageLayoutComboBox.Name = "pageLayoutComboBox";
+            pageLayoutComboBox.Size = new Size(121, 23);
+            pageLayoutComboBox.TabIndex = 3;
+            pageLayoutComboBox.SelectedIndexChanged += pageLayoutComboBox_SelectedIndexChanged;
+            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(18, 53);
+            label2.Location = new System.Drawing.Point(40, 25);
             label2.Name = "label2";
             label2.Size = new Size(74, 15);
             label2.TabIndex = 6;
@@ -242,7 +298,7 @@ namespace CustomCalendar
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(18, 19);
+            label1.Location = new System.Drawing.Point(40, 63);
             label1.Name = "label1";
             label1.Size = new Size(75, 15);
             label1.TabIndex = 5;
@@ -251,25 +307,40 @@ namespace CustomCalendar
             // startingDayComboBox
             // 
             startingDayComboBox.FormattingEnabled = true;
-            startingDayComboBox.Location = new System.Drawing.Point(117, 53);
+            startingDayComboBox.Location = new System.Drawing.Point(139, 25);
             startingDayComboBox.Name = "startingDayComboBox";
             startingDayComboBox.Size = new Size(121, 23);
             startingDayComboBox.TabIndex = 4;
+            startingDayComboBox.SelectedIndexChanged += startingDayComboBox_SelectedIndexChanged;
             // 
-            // pageLayoutComboBox
+            // loadDataButton
             // 
-            pageLayoutComboBox.FormattingEnabled = true;
-            pageLayoutComboBox.Items.AddRange(new object[] { "Portrait", "Landscape" });
-            pageLayoutComboBox.Location = new System.Drawing.Point(117, 19);
-            pageLayoutComboBox.Name = "pageLayoutComboBox";
-            pageLayoutComboBox.Size = new Size(121, 23);
-            pageLayoutComboBox.TabIndex = 3;
+            loadDataButton.Dock = DockStyle.Top;
+            loadDataButton.Location = new System.Drawing.Point(0, 46);
+            loadDataButton.Name = "loadDataButton";
+            loadDataButton.Size = new Size(257, 23);
+            loadDataButton.TabIndex = 4;
+            loadDataButton.Text = "Load Data";
+            loadDataButton.UseVisualStyleBackColor = true;
+            loadDataButton.Click += loadDataButton_Click;
+            // 
+            // saveDataButton
+            // 
+            saveDataButton.Dock = DockStyle.Top;
+            saveDataButton.Location = new System.Drawing.Point(0, 23);
+            saveDataButton.Name = "saveDataButton";
+            saveDataButton.Size = new Size(257, 23);
+            saveDataButton.TabIndex = 3;
+            saveDataButton.Text = "Save Data";
+            saveDataButton.UseVisualStyleBackColor = true;
+            saveDataButton.Click += saveDataButton_Click;
             // 
             // button2
             // 
-            button2.Location = new System.Drawing.Point(46, 108);
+            button2.Dock = DockStyle.Top;
+            button2.Location = new System.Drawing.Point(0, 0);
             button2.Name = "button2";
-            button2.Size = new Size(162, 23);
+            button2.Size = new Size(257, 23);
             button2.TabIndex = 2;
             button2.Text = "Generate";
             button2.UseVisualStyleBackColor = true;
@@ -297,7 +368,11 @@ namespace CustomCalendar
             splitContainer2.ResumeLayout(false);
             panel2.ResumeLayout(false);
             finalizeTabPage.ResumeLayout(false);
-            finalizeTabPage.PerformLayout();
+            splitContainer3.Panel1.ResumeLayout(false);
+            splitContainer3.Panel1.PerformLayout();
+            splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer3).EndInit();
+            splitContainer3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -320,5 +395,10 @@ namespace CustomCalendar
         private ComboBox startingDayComboBox;
         private Label label2;
         private Label label1;
+        private SplitContainer splitContainer3;
+        private ComboBox exportFormatComboBox;
+        private Label label3;
+        private Button loadDataButton;
+        private Button saveDataButton;
     }
 }
