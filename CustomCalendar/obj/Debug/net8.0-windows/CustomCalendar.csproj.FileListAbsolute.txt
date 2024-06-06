@@ -1,0 +1,82 @@
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.exe
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.deps.json
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.runtimeconfig.json
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.pdb
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.barcodes.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.bouncy-castle-connector.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.forms.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.io.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.kernel.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.layout.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.pdfa.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.pdfua.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.sign.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.styledxmlparser.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.svg.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.commons.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.DotNet.PlatformAbstractions.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyModel.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.csproj.AssemblyReference.cache
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.Form1.resources
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.csproj.GenerateResource.cache
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.GeneratedMSBuildEditorConfig.editorconfig
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.AssemblyInfoInputs.cache
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.AssemblyInfo.cs
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.csproj.CoreCompileInputs.cache
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCa.2673FC4F.Up2Date
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\refint\CustomCalendar.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.pdb
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.genruntimeconfig.cache
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\ref\CustomCalendar.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+D:\PC Locations\Documents\ThomasCalendar\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.bouncy-castle-adapter.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.exe
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.deps.json
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.runtimeconfig.json
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\CustomCalendar.pdb
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\BouncyCastle.Cryptography.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.barcodes.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.bouncy-castle-connector.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.forms.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.io.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.kernel.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.layout.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.pdfa.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.pdfua.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.sign.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.styledxmlparser.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.svg.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.bouncy-castle-adapter.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\itext.commons.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.DotNet.PlatformAbstractions.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyModel.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Microsoft.Extensions.Primitives.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.csproj.AssemblyReference.cache
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.Form1.resources
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.csproj.GenerateResource.cache
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.AssemblyInfoInputs.cache
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.AssemblyInfo.cs
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.csproj.CoreCompileInputs.cache
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCa.2673FC4F.Up2Date
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\refint\CustomCalendar.dll
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.pdb
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\CustomCalendar.genruntimeconfig.cache
+D:\GitHubRepos\CustomCalendar\CustomCalendar\obj\Debug\net8.0-windows\ref\CustomCalendar.dll
