@@ -233,7 +233,7 @@ namespace CustomCalendar
 
         private void createWeeklyPDFTable(Document document, MonthData monthData, int weekNumber, int dayNumber, int startingDayInMonth)
         {
-            Table header = new Table(3);
+            Table header = new Table(UnitValue.CreatePercentArray(3));
             header.SetWidth(UnitValue.CreatePercentValue(100));
             header.AddCell(new Cell().Add(new Paragraph("Week: " + (weekNumber + 1))));
             header.AddCell(new Cell().Add(new Paragraph("Month: " + monthData.GetMonthName())));
@@ -244,14 +244,20 @@ namespace CustomCalendar
 
             UnitValue headerHeight = header.GetHeight();
 
-            var table = new Table(m_calendarData.GetDaysData().Count);
+            var table = new Table(UnitValue.CreatePercentArray(m_calendarData.GetDaysData().Count));
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             table.SetHeight(getPageSize().GetHeight() - header.GetHeight().GetValue());
 
+            int longestDayName = 0;
             foreach (DayData day in m_calendarData.GetDaysData())
             {
-                table.AddHeaderCell(day.GetDayName());
+                longestDayName = Math.Max(longestDayName, day.GetDayName().Length);
+            }
+
+            foreach (DayData day in m_calendarData.GetDaysData())
+            {
+                table.AddHeaderCell(day.GetDayName().PadRight(longestDayName));
             }
 
             for (int i = 0; i < m_calendarData.GetDaysData().Count; ++i)
@@ -306,7 +312,7 @@ namespace CustomCalendar
 
         private void createMonthPDFTable(Document document, MonthData monthData, int startingDayIndex)
         {
-            Table header = new Table(2);
+            Table header = new Table(UnitValue.CreatePercentArray(2));
             header.SetWidth(UnitValue.CreatePercentValue(100));
             header.AddCell(new Cell().Add(new Paragraph("Month: " + monthData.GetMonthName())));
             header.AddCell(new Cell().Add(new Paragraph("Year: " + 0)));
@@ -316,15 +322,22 @@ namespace CustomCalendar
 
             UnitValue headerHeight = header.GetHeight();
 
-            var table = new Table(m_calendarData.GetDaysData().Count);
+            var table = new Table(UnitValue.CreatePercentArray(m_calendarData.GetDaysData().Count));
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             table.SetHeight(getPageSize().GetHeight() - header.GetHeight().GetValue());
 
+            int longestDayName = 0;
             foreach (DayData day in m_calendarData.GetDaysData())
             {
-                table.AddHeaderCell(day.GetDayName());
+                longestDayName = Math.Max(longestDayName, day.GetDayName().Length);
             }
+
+            foreach (DayData day in m_calendarData.GetDaysData())
+            {
+                table.AddHeaderCell(day.GetDayName().PadRight(longestDayName));
+            }
+
             for (int i = 0; i < monthData.GetNumberOfDays() + startingDayIndex; ++i)
             {
                 Cell cell = new Cell();
