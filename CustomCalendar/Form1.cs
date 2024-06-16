@@ -656,7 +656,7 @@ namespace CustomCalendar
             // Repeat Frequency
             Label repeatFrequencyLabel = new Label();
             repeatFrequencyLabel.Location = new System.Drawing.Point(0, dayIndexUpDown.Bottom);
-            repeatFrequencyLabel.Text = "Repeat Frequency: ";
+            repeatFrequencyLabel.Text = "Occurs Every X Days: ";
             repeatFrequencyLabel.AutoSize = true;
             newPanel.Controls.Add(repeatFrequencyLabel);
 
