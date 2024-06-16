@@ -181,49 +181,92 @@ namespace CustomCalendar
                     Document document = new Document(pdfDocument, getPageSize());
                     document.SetMargins(20, 20, 20, 20);
 
-                    int monthDayStartingIndex = m_calendarData.GetStartingDayComboIndex();
-                    int weekNumber = 0;
 
-                    for (int i = 0; i < m_calendarData.GetMonthsData().Count; ++i)
+                    if (m_calendarData.GetExportFormatType() == ExportFormatType.Monthly)
                     {
-                        MonthData monthData = m_calendarData.GetMonthsData()[i];
-
-                        if (m_calendarData.GetExportFormatType() == ExportFormatType.Monthly)
+                        GeneratedDayData[][] generatedDaysByMonth = m_calendarData.GenerateDaysInYearByMonth(m_calendarData.GetStartingDayComboIndex());
+                        for (int i = 0; i < generatedDaysByMonth.Length; ++i)
                         {
-                            createMonthPDFTable(document, monthData, monthDayStartingIndex);
+                            GeneratedDayData[] monthData = generatedDaysByMonth[i];
+                            if (monthData.Length == 0)
+                            {
+                                continue;
+                            }
 
-                            monthDayStartingIndex = (monthDayStartingIndex + monthData.GetNumberOfDays()) % m_calendarData.GetDaysData().Count;
+                            createMonthPDFTable(document, monthData);
 
-                            if (i < m_calendarData.GetMonthsData().Count - 1)
+                            if (i < generatedDaysByMonth.Length - 1)
                             {
                                 document.Add(new AreaBreak());
                             }
                         }
-                        else
+                    }
+                    else
+                    {
+                        List<GeneratedDayData[]> generatedDaysByWeek = m_calendarData.GenerateDaysInYearByWeek(m_calendarData.GetStartingDayComboIndex());
+                        for (int i = 0; i < generatedDaysByWeek.Count; ++i)
                         {
-                            int numberOfWeeksInMonth = (int)Math.Ceiling((float)monthData.GetNumberOfDays() / (float)m_calendarData.GetDaysData().Count);
-                            int dayNumber = -monthDayStartingIndex;
-                            int startingDayInMonth = monthDayStartingIndex;
-                            while (dayNumber < monthData.GetNumberOfDays())
+                            GeneratedDayData[] weekData = generatedDaysByWeek[i];
+                            if (weekData.Length == 0)
                             {
-                                if (weekNumber > 0)
-                                {
-                                    document.Add(new AreaBreak());
-                                }
-
-                                createWeeklyPDFTable(document, monthData, weekNumber++, dayNumber, startingDayInMonth);
-
-                                dayNumber += m_calendarData.GetDaysData().Count;
-
-                            }
-                            for (int j = 0; j < numberOfWeeksInMonth; ++j)
-                            {
-
+                                continue;
                             }
 
-                            monthDayStartingIndex = (monthDayStartingIndex + monthData.GetNumberOfDays()) % m_calendarData.GetDaysData().Count;
+                            createWeeklyPDFTable(document, weekData);
+
+                            if (i < generatedDaysByWeek.Count - 1)
+                            {
+                                document.Add(new AreaBreak());
+                            }
                         }
                     }
+
+                    //GeneratedDayData[] generatedDays = m_calendarData.GenerateDaysInYear(m_calendarData.GetStartingDayComboIndex());
+
+
+                    //int monthDayStartingIndex = m_calendarData.GetStartingDayComboIndex();
+                    //int weekNumber = 0;
+
+                    //for (int i = 0; i < m_calendarData.GetMonthsData().Count; ++i)
+                    //{
+                    //    MonthData monthData = m_calendarData.GetMonthsData()[i];
+
+                    //    if (m_calendarData.GetExportFormatType() == ExportFormatType.Monthly)
+                    //    {
+                    //        //createMonthPDFTable(document, monthData, monthDayStartingIndex);
+
+                    //        //monthDayStartingIndex = (monthDayStartingIndex + monthData.GetNumberOfDays()) % m_calendarData.GetDaysData().Count;
+
+                    //        //if (i < m_calendarData.GetMonthsData().Count - 1)
+                    //        //{
+                    //        //    document.Add(new AreaBreak());
+                    //        //}
+                    //    }
+                    //    else
+                    //    {
+                    //        int numberOfWeeksInMonth = (int)Math.Ceiling((float)monthData.GetNumberOfDays() / (float)m_calendarData.GetDaysData().Count);
+                    //        int dayNumber = -monthDayStartingIndex;
+                    //        int startingDayInMonth = monthDayStartingIndex;
+                    //        while (dayNumber < monthData.GetNumberOfDays())
+                    //        {
+                    //            if (weekNumber > 0)
+                    //            {
+                    //                document.Add(new AreaBreak());
+                    //            }
+
+                    //            createWeeklyPDFTable(document, monthData, weekNumber++, dayNumber, startingDayInMonth);
+
+                    //            dayNumber += m_calendarData.GetDaysData().Count;
+
+                    //        }
+                    //        for (int j = 0; j < numberOfWeeksInMonth; ++j)
+                    //        {
+
+                    //        }
+
+                    //        monthDayStartingIndex = (monthDayStartingIndex + monthData.GetNumberOfDays()) % m_calendarData.GetDaysData().Count;
+                    //    }
+                    //}
 
                     pdfDocument.Close();
                     myStream.Close();
@@ -231,12 +274,12 @@ namespace CustomCalendar
             }
         }
 
-        private void createWeeklyPDFTable(Document document, MonthData monthData, int weekNumber, int dayNumber, int startingDayInMonth)
+        private void createWeeklyPDFTable(Document document, GeneratedDayData[] daysInWeek)
         {
             Table header = new Table(UnitValue.CreatePercentArray(3));
             header.SetWidth(UnitValue.CreatePercentValue(100));
-            header.AddCell(new Cell().Add(new Paragraph("Week: " + (weekNumber + 1))));
-            header.AddCell(new Cell().Add(new Paragraph("Month: " + monthData.GetMonthName())));
+            header.AddCell(new Cell().Add(new Paragraph("Week: " + (daysInWeek[0].m_weekNumber + 1))));
+            header.AddCell(new Cell().Add(new Paragraph("Month: " + daysInWeek[0].m_monthName)));
             header.AddCell(new Cell().Add(new Paragraph("Year: ")));
             header.SetPaddingBottom(10);
             header.SetHeight(UnitValue.CreatePointValue(30));
@@ -248,73 +291,51 @@ namespace CustomCalendar
             table.SetWidth(UnitValue.CreatePercentValue(100));
 
             table.SetHeight(getPageSize().GetHeight() - header.GetHeight().GetValue());
-
-            int longestDayName = 0;
             foreach (DayData day in m_calendarData.GetDaysData())
             {
-                longestDayName = Math.Max(longestDayName, day.GetDayName().Length);
+                table.AddHeaderCell(day.GetDayName());
             }
 
-            foreach (DayData day in m_calendarData.GetDaysData())
-            {
-                table.AddHeaderCell(day.GetDayName().PadRight(longestDayName));
-            }
-
-            for (int i = 0; i < m_calendarData.GetDaysData().Count; ++i)
+            int startingDayInWeekNumber = m_calendarData.GetDaysData().FindIndex(x => x.DayName == daysInWeek[0].m_dayName);
+            int endingDayInWeekNumber = m_calendarData.GetDaysData().FindIndex(x => x.DayName == daysInWeek[daysInWeek.Length - 1].m_dayName);
+            for (int i = 0; i < startingDayInWeekNumber; ++i)
             {
                 Cell cell = new Cell();
-                if (dayNumber + i < 0 || dayNumber + i >= monthData.GetNumberOfDays())
+                cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
+                table.AddCell(cell);
+            }
+
+            for (int i = 0; i < daysInWeek.Length; ++i)
+            {
+                GeneratedDayData dayData = daysInWeek[i];
+
+                Cell cell = new Cell();
+                cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.WHITE);
+                cell.Add(new Paragraph("" + (dayData.m_dayInMonthNumber)));
+
+                foreach (string eventName in dayData.m_eventNames)
                 {
-                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
-                }
-                else
-                {
-                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.WHITE);
-                    cell.Add(new Paragraph("" + (dayNumber + i + 1)));
+                    cell.Add(new Paragraph(eventName));
                 }
 
                 table.AddCell(cell);
             }
 
-
-
-            //foreach (DayData day in m_calendarData.GetDaysData())
-            //{
-            //    Cell cell = new Cell();
-            //    cell.Add(new Paragraph("" + 0));
-
-            //    table.AddCell(cell);
-            //}
-
-            //foreach (DayData day in m_daysData)
-            //{
-            //    table.AddHeaderCell(day.GetDayName());
-            //}
-            //for (int i = 0; i < monthData.GetNumberOfDays() + startingDayIndex; ++i)
-            //{
-            //    Cell cell = new Cell();
-            //    if (i < startingDayIndex)
-            //    {
-            //        cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
-            //    }
-            //    else
-            //    {
-            //        cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.WHITE);
-            //        cell.Add(new Paragraph("" + (i - startingDayIndex + 1)));
-            //    }
-
-            //    table.AddCell(cell);
-
-            //}
+            for (int i = endingDayInWeekNumber + 1; i < m_calendarData.GetDaysData().Count; ++i)
+            {
+                Cell cell = new Cell();
+                cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
+                table.AddCell(cell);
+            }
 
             document.Add(table);
         }
 
-        private void createMonthPDFTable(Document document, MonthData monthData, int startingDayIndex)
+        private void createMonthPDFTable(Document document, GeneratedDayData[] daysInMonth)
         {
             Table header = new Table(UnitValue.CreatePercentArray(2));
             header.SetWidth(UnitValue.CreatePercentValue(100));
-            header.AddCell(new Cell().Add(new Paragraph("Month: " + monthData.GetMonthName())));
+            header.AddCell(new Cell().Add(new Paragraph("Month: " + daysInMonth[0].m_monthName)));
             header.AddCell(new Cell().Add(new Paragraph("Year: " + 0)));
             header.SetPaddingBottom(10);
             header.SetHeight(UnitValue.CreatePointValue(30));
@@ -324,31 +345,32 @@ namespace CustomCalendar
 
             var table = new Table(UnitValue.CreatePercentArray(m_calendarData.GetDaysData().Count));
             table.SetWidth(UnitValue.CreatePercentValue(100));
+            foreach (DayData day in m_calendarData.GetDaysData())
+            {
+                table.AddHeaderCell(day.GetDayName());
+            }
 
             table.SetHeight(getPageSize().GetHeight() - header.GetHeight().GetValue());
 
-            int longestDayName = 0;
-            foreach (DayData day in m_calendarData.GetDaysData())
-            {
-                longestDayName = Math.Max(longestDayName, day.GetDayName().Length);
-            }
-
-            foreach (DayData day in m_calendarData.GetDaysData())
-            {
-                table.AddHeaderCell(day.GetDayName().PadRight(longestDayName));
-            }
-
-            for (int i = 0; i < monthData.GetNumberOfDays() + startingDayIndex; ++i)
+            int dayInWeekNumber = m_calendarData.GetDaysData().FindIndex(x => x.DayName == daysInMonth[0].m_dayName);
+            for (int i = 0; i < dayInWeekNumber; ++i)
             {
                 Cell cell = new Cell();
-                if (i < startingDayIndex)
+                cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
+                table.AddCell(cell);
+            }
+
+            for (int i = 0; i < daysInMonth.Length; ++i)
+            {
+                GeneratedDayData dayData = daysInMonth[i];
+
+                Cell cell = new Cell();
+                cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.WHITE);
+                cell.Add(new Paragraph("" + (dayData.m_dayInMonthNumber)));
+
+                foreach (string eventName in dayData.m_eventNames)
                 {
-                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.GRAY);
-                }
-                else
-                {
-                    cell.SetBackgroundColor(iText.Kernel.Colors.ColorConstants.WHITE);
-                    cell.Add(new Paragraph("" + (i - startingDayIndex + 1)));
+                    cell.Add(new Paragraph(eventName));
                 }
 
                 table.AddCell(cell);
@@ -490,6 +512,7 @@ namespace CustomCalendar
                     if (newCalendarData != null)
                     {
                         m_calendarData = newCalendarData;
+                        m_calendarData.OnLoaded();
 
                         allDaysFlowPanel.Controls.Clear();
                         foreach (DayData dayData in m_calendarData.GetDaysData())
@@ -501,6 +524,14 @@ namespace CustomCalendar
                         foreach (MonthData monthData in m_calendarData.GetMonthsData())
                         {
                             addMonthUI(monthData);
+                        }
+
+                        allEventsPanel.Controls.Clear();
+                        for (int i = 0; i < m_calendarData.GetEventsData().Count; ++i)
+                        {
+                            EventData fixedEventData = m_calendarData.GetEventsData()[i];
+                            fixedEventData.SetMonthDataCallback(m_calendarData.GetMonthsData);
+                            addFixedEventUI(fixedEventData);
                         }
 
                         startingDayComboBox.Items.Clear();
@@ -554,6 +585,136 @@ namespace CustomCalendar
             }
 
             m_calendarData.SetExportFormatComboIndex((ExportFormatType)selectedValue);
+        }
+
+
+
+        private void addFixedEventUI(EventData eventData)
+        {
+            Panel newPanel = new Panel();
+            newPanel.BorderStyle = BorderStyle.FixedSingle;
+            Size backgroundSize = new Size(allEventsPanel.Width - 8, 0);
+
+            // Event Name
+            Label eventNameLabel = new Label();
+            eventNameLabel.Text = "Event Name: ";
+            eventNameLabel.AutoSize = true;
+            newPanel.Controls.Add(eventNameLabel);
+
+            TextBox eventNameTextBox = new TextBox();
+            eventNameTextBox.Location = new System.Drawing.Point(eventNameLabel.Size.Width, 0);
+            eventNameTextBox.Text = eventData.GetEventName();
+            eventNameTextBox.TextChanged += eventData.EventNameText_Changed;
+            newPanel.Controls.Add(eventNameTextBox);
+
+            // Event Length
+            Label eventLengthLabel = new Label();
+            eventLengthLabel.Location = new System.Drawing.Point(0, eventNameTextBox.Bottom);
+            eventLengthLabel.Text = "Event Length: ";
+            eventLengthLabel.AutoSize = true;
+            newPanel.Controls.Add(eventLengthLabel);
+
+            NumericUpDown eventLengthUpDown = new NumericUpDown();
+            eventLengthUpDown.Location = new System.Drawing.Point(eventLengthLabel.Size.Width, eventLengthLabel.Location.Y);
+            eventLengthUpDown.Value = eventData.GetEventLength();
+            eventLengthUpDown.DecimalPlaces = 0;
+            eventLengthUpDown.ValueChanged += eventData.EventLength_Changed;
+            newPanel.Controls.Add(eventLengthUpDown);
+
+            // Month Name
+            Label monthNameLabel = new Label();
+            monthNameLabel.Location = new System.Drawing.Point(0, eventLengthUpDown.Bottom);
+            monthNameLabel.Text = "Month Name: ";
+            monthNameLabel.AutoSize = true;
+            newPanel.Controls.Add(monthNameLabel);
+
+            ComboBox monthNameComboBox = new ComboBox();
+            monthNameComboBox.Location = new System.Drawing.Point(monthNameLabel.Size.Width, monthNameLabel.Location.Y);
+            monthNameComboBox.MouseClick += eventData.MonthNameComboBox_MouseClick;
+            monthNameComboBox.SelectedValueChanged += eventData.MonthNameComboBox_SelectedValueChanged;
+            eventData.UpdateMonthComboBox(monthNameComboBox);
+            newPanel.Controls.Add(monthNameComboBox);
+
+            // Day Index
+            Label dayIndexLabel = new Label();
+            dayIndexLabel.Location = new System.Drawing.Point(monthNameComboBox.Right + 20, monthNameLabel.Location.Y);
+            dayIndexLabel.Text = "Day Number: ";
+            dayIndexLabel.AutoSize = true;
+            newPanel.Controls.Add(dayIndexLabel);
+
+            NumericUpDown dayIndexUpDown = new NumericUpDown();
+            dayIndexUpDown.Location = new System.Drawing.Point(dayIndexLabel.Right, dayIndexLabel.Location.Y);
+            dayIndexUpDown.DecimalPlaces = 0;
+            dayIndexUpDown.Minimum = 1;
+            dayIndexUpDown.Maximum = 1;
+            dayIndexUpDown.ValueChanged += eventData.DayIndexUpDown_ValueChanged;
+            newPanel.Controls.Add(dayIndexUpDown);
+            eventData.SetDayIndexUpDown(dayIndexUpDown);
+            eventData.UpdateDayIndexUpDownMax();
+            dayIndexUpDown.Value = eventData.GetDayIndex();
+
+            // Repeat Frequency
+            Label repeatFrequencyLabel = new Label();
+            repeatFrequencyLabel.Location = new System.Drawing.Point(0, dayIndexUpDown.Bottom);
+            repeatFrequencyLabel.Text = "Repeat Frequency: ";
+            repeatFrequencyLabel.AutoSize = true;
+            newPanel.Controls.Add(repeatFrequencyLabel);
+
+            NumericUpDown repeatFrequencyUpDown = new NumericUpDown();
+            repeatFrequencyUpDown.Location = new System.Drawing.Point(repeatFrequencyLabel.Size.Width, repeatFrequencyLabel.Location.Y);
+            repeatFrequencyUpDown.Value = eventData.GetRepeatFrequency();
+            repeatFrequencyUpDown.DecimalPlaces = 0;
+            repeatFrequencyUpDown.ValueChanged += eventData.RepeatFrequency_Changed;
+            newPanel.Controls.Add(repeatFrequencyUpDown);
+
+            // Update Positions & Size.
+            int longestLabelWidth = Math.Max(eventNameLabel.Size.Width, Math.Max(eventLengthLabel.Size.Width, Math.Max(monthNameLabel.Size.Width, Math.Max(repeatFrequencyLabel.Size.Width, dayIndexLabel.Size.Width))));
+            int textBoxWidth = backgroundSize.Width - longestLabelWidth - 10;
+            eventNameTextBox.Location = new System.Drawing.Point(longestLabelWidth, 0);
+            eventNameTextBox.Size = new Size(textBoxWidth, eventNameLabel.Size.Height);
+            eventLengthUpDown.Location = new System.Drawing.Point(longestLabelWidth, eventLengthUpDown.Location.Y);
+            monthNameComboBox.Location = new System.Drawing.Point(longestLabelWidth, monthNameComboBox.Location.Y);
+            dayIndexLabel.Location = new System.Drawing.Point(monthNameComboBox.Right + 20, monthNameLabel.Location.Y);
+            dayIndexUpDown.Location = new System.Drawing.Point(dayIndexLabel.Right, dayIndexLabel.Location.Y);
+            repeatFrequencyUpDown.Location = new System.Drawing.Point(longestLabelWidth, repeatFrequencyUpDown.Location.Y);
+            
+            // Remove Event
+            Button removeEventButton = new Button();
+            removeEventButton.Text = "Remove";
+            removeEventButton.Location = new System.Drawing.Point(0, repeatFrequencyUpDown.Bottom);
+            removeEventButton.Click += removeEventButton_Clicked;
+            newPanel.Controls.Add(removeEventButton);
+
+
+            backgroundSize.Height = removeEventButton.Bottom + 10;
+            newPanel.Size = backgroundSize;
+            allEventsPanel.Controls.Add(newPanel);
+        }
+
+        private void removeEventButton_Clicked(object? sender, EventArgs e)
+        {
+            Button? removeEventButton = sender as Button;
+            if (removeEventButton == null)
+            {
+                return;
+            }
+
+            int panelIndex = allEventsPanel.Controls.IndexOf(removeEventButton.Parent);
+            if (panelIndex != -1)
+            {
+                m_calendarData.GetEventsData().RemoveAt(panelIndex);
+                allEventsPanel.Controls.RemoveAt(panelIndex);
+            }
+        }
+
+        private void addEventButton_Click(object sender, EventArgs e)
+        {
+            EventData newEventData = new EventData();
+            newEventData.SetMonthDataCallback(m_calendarData.GetMonthsData);
+
+            m_calendarData.GetEventsData().Add(newEventData);
+
+            addFixedEventUI(newEventData);
         }
     }
 }

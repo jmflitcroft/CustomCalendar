@@ -54,6 +54,9 @@ namespace CustomCalendar
             panel2 = new Panel();
             button1 = new Button();
             eventsTabPage = new TabPage();
+            splitContainer4 = new SplitContainer();
+            allEventsPanel = new FlowLayoutPanel();
+            addFixedEventButton = new Button();
             finalizeTabPage = new TabPage();
             splitContainer3 = new SplitContainer();
             exportFormatComboBox = new ComboBox();
@@ -78,6 +81,11 @@ namespace CustomCalendar
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
             panel2.SuspendLayout();
+            eventsTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).BeginInit();
+            splitContainer4.Panel1.SuspendLayout();
+            splitContainer4.Panel2.SuspendLayout();
+            splitContainer4.SuspendLayout();
             finalizeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer3).BeginInit();
             splitContainer3.Panel1.SuspendLayout();
@@ -216,6 +224,7 @@ namespace CustomCalendar
             // 
             // eventsTabPage
             // 
+            eventsTabPage.Controls.Add(splitContainer4);
             eventsTabPage.Location = new System.Drawing.Point(4, 24);
             eventsTabPage.Name = "eventsTabPage";
             eventsTabPage.Padding = new Padding(3);
@@ -223,6 +232,43 @@ namespace CustomCalendar
             eventsTabPage.TabIndex = 2;
             eventsTabPage.Text = "Events";
             eventsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer4
+            // 
+            splitContainer4.Dock = DockStyle.Fill;
+            splitContainer4.Location = new System.Drawing.Point(3, 3);
+            splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            splitContainer4.Panel1.Controls.Add(allEventsPanel);
+            // 
+            // splitContainer4.Panel2
+            // 
+            splitContainer4.Panel2.Controls.Add(addFixedEventButton);
+            splitContainer4.Size = new Size(786, 416);
+            splitContainer4.SplitterDistance = 525;
+            splitContainer4.TabIndex = 0;
+            // 
+            // allEventsPanel
+            // 
+            allEventsPanel.AutoScroll = true;
+            allEventsPanel.Dock = DockStyle.Fill;
+            allEventsPanel.Location = new System.Drawing.Point(0, 0);
+            allEventsPanel.Name = "allEventsPanel";
+            allEventsPanel.Size = new Size(525, 416);
+            allEventsPanel.TabIndex = 0;
+            // 
+            // addFixedEventButton
+            // 
+            addFixedEventButton.Dock = DockStyle.Top;
+            addFixedEventButton.Location = new System.Drawing.Point(0, 0);
+            addFixedEventButton.Name = "addFixedEventButton";
+            addFixedEventButton.Size = new Size(257, 23);
+            addFixedEventButton.TabIndex = 0;
+            addFixedEventButton.Text = "Add Event";
+            addFixedEventButton.UseVisualStyleBackColor = true;
+            addFixedEventButton.Click += addEventButton_Click;
             // 
             // finalizeTabPage
             // 
@@ -367,6 +413,11 @@ namespace CustomCalendar
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            eventsTabPage.ResumeLayout(false);
+            splitContainer4.Panel1.ResumeLayout(false);
+            splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer4).EndInit();
+            splitContainer4.ResumeLayout(false);
             finalizeTabPage.ResumeLayout(false);
             splitContainer3.Panel1.ResumeLayout(false);
             splitContainer3.Panel1.PerformLayout();
@@ -400,5 +451,8 @@ namespace CustomCalendar
         private Label label3;
         private Button loadDataButton;
         private Button saveDataButton;
+        private SplitContainer splitContainer4;
+        private Button addFixedEventButton;
+        private FlowLayoutPanel allEventsPanel;
     }
 }
